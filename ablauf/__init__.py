@@ -1,9 +1,14 @@
-__author__ = 'thorsten'
-
 # ----------------------------------------------------------------------------------------------------------------------
 # The #1_Automate module
 # ----------------------------------------------------------------------------------------------------------------------
 class Automate():
+    """
+    The functions of the automate are:
+
+    * initialize the state engine
+    * stores the states
+    * trigger a transit from one state to another state via a transition
+    """
     states = {}
     actualstate = None
     debugmode = False
@@ -13,26 +18,56 @@ class Automate():
     # ------------------------------------------------------------------------------------------------------------------
     @classmethod
     def getStates(self):
+        """
+        Returns the list of states
+
+        :return: list of states
+        :rtype: dict
+        """
         return self.states
 
 
     @classmethod
     def getActualState(self):
+        """
+        Return the actual state of the automate
+
+        :return: actual state
+        :rtype: ablauf.state
+        """
         return self.actualstate
 
 
     @classmethod
     def setActualState(self, state):
+        """
+        Set the actual state to a given state
+
+        :param state: the new state
+        :type state: ablauf.state
+        """
         self.actualstate = state
 
 
     @classmethod
     def getDebugMode(self):
+        """
+        Return a boolean value to indicate if the debug mode is used
+
+        :return: debug mode
+        :rtype: boolean
+        """
         return self.debugmode
 
 
     @classmethod
     def setDebugMode(self, mode):
+        """
+        Set the debug mode. Either to True or False
+
+        :param mode: the new mode
+        :type: boolean
+        """
         self.debugmode = mode
 
 
@@ -42,55 +77,49 @@ class Automate():
     @classmethod
     def init(self):
         """
-        A state machine
+        Initialize Ablauf
 
         *Example:*
 
         .. code-block:: python
 
+            import ablauf as abl
             # -------------------------------------------------------------
-            # Initialize #1_Automate
+            # Game State
             # -------------------------------------------------------------
-            non = ncf.ncfAutomate()
+            stState = State("State")
 
-            # -------------------------------------------------------------
-            # Start Stage
-            # -------------------------------------------------------------
-            ncf.ncfTransition('Finish','Exit')     # Transition to End Stage
-            ncf.ncfStage(non)
-            def Init(self):
-                print "Stage Init"
-                return self.nextStage("Finish")     # Continue with End Stage
+            tFinishFromState = Transition("FinishFromState", "End", None)
+            stState.addTransition(tFinishFromState)
 
-            # -------------------------------------------------------------
-            # End Stage
-            # -------------------------------------------------------------
-            ncf.ncfStage(non)
-            def Exit(self):
-                print "Stage Exit"
-                ncf.exit()
-                exit()
+            # *************************************************************
+            # Ablauf initialization
+            # *************************************************************
+            abl.Automate.init()
 
+            # -------------- -----------------------------------------------
+            # Set Debug Level
             # -------------------------------------------------------------
-            # Start #1_Automate
-            # -------------------------------------------------------------
-            non.start("Init")                       # Start with the first Stage --> "Init"
+            abl.Automate.setDebugMode(True)
+
+            # *************************************************************
+            # Start Ablauf state engine
+            # *************************************************************
+            abl.Automate.start("State")
+            abl.Automate.transit("FinishFromState")
         """
 
-        self.log("initialize NonConForm")
+        self.log("initialize Ablauf")
 
 
     @classmethod
     def exit(self):
         """
-        * Exit the NonConForm State Engine
-        *
-        * @method exit
-        * @static
+        Exit the Ablauf State Engine
         """
 
         self.log("-----------------------------")
-        self.log('finishing ablauf')
+        self.log('finishing Ablauf')
         self.log("-----------------------------")
 
 
@@ -99,9 +128,8 @@ class Automate():
         """
         Add a State to the list of states
 
-        @method addState
-        @static
-        @param {State} state The new state that is added to the list of states
+        :param state: The new state that is added to the list of states
+        :type state: ablauf.state
         """
 
         self.getStates()[state.getName()] = state
@@ -112,10 +140,10 @@ class Automate():
         """
         Get a state from the list of states
 
-        @method getState
-        @static
-        @param {string} statename the name of the state
-        @return {State} the state
+        :param statename: the name of the state
+        :type statename: string
+        :return: the state
+        :rtype: ablauf.state
         """
 
         return self.getStates()[statename]
@@ -126,9 +154,8 @@ class Automate():
         """
         Do a transition to given state
 
-        @method transit
-        @static
-        @param {string} transitionname the name of the new state
+        :param transitionname: the name of the new state
+        :type transitionname: string
         """
 
         source = self.getActualState()
@@ -142,7 +169,6 @@ class Automate():
         transition.fire()
 
         if not destination.enter is None:
-            self.log("entering via function....")
             destination.enter()
 
         # Set new Stage & Controller & View function
@@ -150,26 +176,25 @@ class Automate():
 
 
     @classmethod
-    def start(self, pFirststatename):
+    def start(self, firststatename,initfunction):
         """
         starts the processing of the main loop
 
-        @method start
-        @static
+        :param firststatename: the name of the first state
+        :type firststatename: string
+        :param initfuction: the name of the function that is called during the transition from the Start state to the first state
+        :type initfuction: function
         """
-
-        # compatibility with NonConForm JavaScript
-        self.log("NonConForm main loop started")
-
         _stStart = State("Start")
-        _tGoFirst = Transition("GotoFirstState", pFirststatename, None)
+        _tGoFirst = Transition("GotoFirstState", firststatename, initfunction)
+
         _stStart.addTransition(_tGoFirst)
 
         _stEnd = State("End")
         _stEnd.setEnterFunction(self.exit)
 
         self.log("-----------------------------")
-        self.log("start NonConForm state engine")
+        self.log("start Ablauf state engine")
         self.log("-----------------------------")
 
         # set first state and transit to this stage
@@ -182,9 +207,8 @@ class Automate():
         """
         Print a nessage to the console. If debugmode=true the message will be send to the javascript console.
 
-        @method log
-        @static
-        @param message the message to print to the javascript console.
+        :param message: the message to print
+        :type message: string
         """
 
         if self.getDebugMode() == True:
@@ -192,24 +216,43 @@ class Automate():
 
 
 class State(object):
+    """
+    A defined state in the life cycle of a program. Could have a enter and a leaving function defined.
+
+    *Example:*
+
+    .. code-block:: python
+
+        # -------------------------------------------------------------
+        # Game State
+        # -------------------------------------------------------------
+        stState = State("State")
+
+        tFinishFromState = Transition("FinishFromState", "End", None)
+        stState.addTransition(tFinishFromState)
+
+    :param name: the name of the state
+    :type name: string
+    """
+
     def defaultenterfunction(self):
+        """
+        The default enter function. If no enter function is defined, this function will be called. It do nothing, but log it's call
+        """
         Automate.log("Entering:" + str(self.name))
 
     def defaultleavefunction(self):
+        """
+        The default leave function. If no leave function is defined, this function will be called. It do nothing, but log it's call
+        """
         Automate.log("Leaving:" + str(self.name))
 
     def __init__(self, name):
         """
         A state inside the state engine.
 
-        @class State
-        @constructor
-        @param {string} name Set the name of the new state
-        @example
-        var stGame = new State("Game");<br/>
-        var tFinishFromGame = new Transition("FinishFromGame","End",function() {});<br/>
-        stGame.addTransition(tFinishFromGame);<br/>
-        Ncf.addState(stGame);<br/>
+        :param name: the name of the state
+        :type name: string
         """
         self.name = name
         self.transitions = {}
@@ -223,8 +266,8 @@ class State(object):
         """
         Get the name of the state
 
-        @method getName
-        @return {string} the name of the state
+        :return: the name of the state
+        :rtype: string
         """
 
         return self.name
@@ -232,18 +275,14 @@ class State(object):
 
     def enter(self):
         """
-         Call the enter function. This will happen automaticaly when a transition to the state happenes
-
-        @method enter
+        Call the enter function. This will happen automatically when a transition to the state happens
         """
 
         self.enterfunction()
 
     def leave(self):
         """
-        Call the leave function. This will happen automaticaly when a transition away from the state happenes
-
-        @method enter
+        Call the leave function. This will happen automatically when a transition is triggered
         """
 
         self.leavefunction()
@@ -252,29 +291,29 @@ class State(object):
         """
         Add a transition to the state.
 
-        @method addTransition
-        @param {Transition} transition
+        :param transition: the ransition to add
+        :type transition: ablauf.Transition
         """
 
         self.transitions[transition.getName()] = transition
 
     def getTransition(self, transitionname):
         """
-        Return the transition of the state with the given transitionname
+        Return the transition of the state with the given transition name
 
-        @method getTransition
-        @param {string} transitionname
-        @return {Transition} the transition
+        :param transitionname: the name of the transition to get
+        :type transitionname: string
+        :return: the transition
+        :rtype: ablauf.Transition
         """
 
         return self.transitions[transitionname]
 
     def setEnterFunction(self, enterfunction):
         """
-        Set the enter function. This function will be called automaticaly when a transition to the state happends
+        Set the enter function. This function will be called automatically when a transition to the state happens
 
-        @method setEnterFunction
-        @param {function} enterfunction the enterfuncton
+        :param enterfunction: the enterfuncton
         """
 
         self.enterfunction = enterfunction
@@ -283,88 +322,33 @@ class State(object):
         """
         Set the leave function. This function will be called automaticaly when a transition formthe state happends
 
-        @method setLeaveFunction
-        @param {function} leavefunction the leave function
+        :param leavefunction: the leave function
         """
 
         self.leavefunction = leavefunction
 
-    def setModel(self, model):
-        """
-        Set the model. This model will be used for the actual view and controller in the main loop.
-
-        @method setModel
-        @param {dictionary} model the model
-        """
-
-        self.model = model
-
-    def setController(self, controllerfunction):
-        """
-        Set the controller function. This function will be called automaticaly during the main loop, its the controller of a state.
-
-        @method setController
-        @param {function} controllerfunction the controller function
-        """
-
-        self.controllerfunction = controllerfunction
-
-
-    def setView(self, viewfunction):
-        """
-        Set the view function. This function will be called automaticaly during the main loop, its the view of a state.
-
-        @method setRunder
-        @param {function} viewfunction the view function
-        """
-
-        self.viewfunction = viewfunction
-
-    def getModel(self):
-        """
-        Return the model of the state
-
-        @method getModel
-        @return {dictionary} model the model
-        """
-
-        return self.model
-
-    def getController(self):
-        """
-        Return the controller function of the state
-
-        @method getController
-        @return {function} controllerfunction the controller function
-        """
-
-        return self.controllerfunction
-
-    def getView(self):
-        """
-        Return the view function of the state
-
-        @method getView
-        @return {function} viewfunction the view function
-        """
-
-        return self.viewfunction
-
 
 class Transition(object):
+    """
+    A path from one state to another. It could have a transition function defined
+
+    *Example:*
+
+    .. code-block:: python
+
+        tFinishFromState = Transition("FinishFromState", "End", None)
+
+    :param name Set the name of the new transition
+    :type name: string
+    :param destinationname: name of the destination state
+    :type destinationname: string
+    :param funct: The function that will be called when the transition is triggered
+    :type funct: function
+    """
+
     def __init__(self, name, destinationname, funct):
         """
         A transition inside the state engine.
-
-        @class Transition
-        @constructor
-        @param {string} name Set the name of the new transition
-        @param {string} name of the destination state
-        @param {function} funct The function that will be called when the transition is triggered
-        @example
-        var stGame = new State("Game");<br/>
-        var tFinishFromGame = new Transition("FinishFromGame","End",function() {});<br/>
-        stGame.addTransition(tFinishFromGame);<br/>
         """
 
         self.name = name
@@ -375,8 +359,8 @@ class Transition(object):
         """
         Return the name of the transition
 
-        @method getName
-        @return {string} name The name of the transition
+        :return: name The name of the transition
+        :rtype: string
         """
 
         return self.name
@@ -385,8 +369,8 @@ class Transition(object):
         """
         Return the destination name of the transition
 
-        @method getDestinationname
-        @return {string} destinationname The destinationname of the transition
+        :return: The destinationname of the transition
+        :rtype: string
         """
 
         return self.destinationname
@@ -395,7 +379,6 @@ class Transition(object):
         """
         Calls the function of the transition
 
-        @method fire
         """
 
         Automate.log("Firing transition function")
