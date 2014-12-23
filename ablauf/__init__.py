@@ -361,9 +361,15 @@ class Transition(object):
 
     .. code-block:: python
 
-        tFinishFromState = Transition("FinishFromState", "End", None)
+        def initfunction():
+            Automate.log("Processing init function")
 
-    :param name Set the name of the new transition
+        _Start = State("Start")
+        _GoFirst = Transition("GotoFirstState", firststatename, initfunction)
+
+        _Start.addTransition(_GoFirst)
+
+    :param name: Set the name of the new transition
     :type name: string
     :param destinationname: name of the destination state
     :type destinationname: string
@@ -374,18 +380,6 @@ class Transition(object):
     def __init__(self, name, destinationname, funct):
         """
         A transition inside the state engine.
-
-        *Example:*
-
-        .. code-block:: python
-
-            def initfunction():
-                Automate.log("Processing init function")
-
-            _Start = State("Start")
-            _GoFirst = Transition("GotoFirstState", firststatename, initfunction)
-
-            _Start.addTransition(_GoFirst)
         """
 
         self.name = name

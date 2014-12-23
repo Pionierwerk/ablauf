@@ -410,9 +410,15 @@
 
 <span class="sd">    .. code-block:: python</span>
 
-<span class="sd">        tFinishFromState = Transition(&quot;FinishFromState&quot;, &quot;End&quot;, None)</span>
+<span class="sd">        def initfunction():</span>
+<span class="sd">            Automate.log(&quot;Processing init function&quot;)</span>
 
-<span class="sd">    :param name Set the name of the new transition</span>
+<span class="sd">        _Start = State(&quot;Start&quot;)</span>
+<span class="sd">        _GoFirst = Transition(&quot;GotoFirstState&quot;, firststatename, initfunction)</span>
+
+<span class="sd">        _Start.addTransition(_GoFirst)</span>
+
+<span class="sd">    :param name: Set the name of the new transition</span>
 <span class="sd">    :type name: string</span>
 <span class="sd">    :param destinationname: name of the destination state</span>
 <span class="sd">    :type destinationname: string</span>
@@ -423,18 +429,6 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">destinationname</span><span class="p">,</span> <span class="n">funct</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        A transition inside the state engine.</span>
-
-<span class="sd">        *Example:*</span>
-
-<span class="sd">        .. code-block:: python</span>
-
-<span class="sd">            def initfunction():</span>
-<span class="sd">                Automate.log(&quot;Processing init function&quot;)</span>
-
-<span class="sd">            _Start = State(&quot;Start&quot;)</span>
-<span class="sd">            _GoFirst = Transition(&quot;GotoFirstState&quot;, firststatename, initfunction)</span>
-
-<span class="sd">            _Start.addTransition(_GoFirst)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
