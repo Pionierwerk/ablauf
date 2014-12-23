@@ -1,0 +1,478 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ablauf &mdash; .  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title=".  documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">.  documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for ablauf</h1><div class="highlight"><pre>
+<span class="c"># ----------------------------------------------------------------------------------------------------------------------</span>
+<span class="c"># The #1_Automate module</span>
+<span class="c"># ----------------------------------------------------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="Automate"><a class="viewcode-back" href="../ablauf.html#ablauf.Automate">[docs]</a><span class="k">class</span> <span class="nc">Automate</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The functions of the automate are:</span>
+
+<span class="sd">    * initialize the state engine</span>
+<span class="sd">    * stores the states</span>
+<span class="sd">    * trigger a transit from one state to another state via a transition</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">states</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">actualstate</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">debugmode</span> <span class="o">=</span> <span class="bp">False</span>
+
+    <span class="c"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="c"># getter / setter</span>
+    <span class="c"># ------------------------------------------------------------------------------------------------------------------</span>
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="Automate.getStates"><a class="viewcode-back" href="../ablauf.html#ablauf.Automate.getStates">[docs]</a>    <span class="k">def</span> <span class="nf">getStates</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the list of states</span>
+
+<span class="sd">        :return: list of states</span>
+<span class="sd">        :rtype: dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">states</span>
+
+</div>
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="Automate.getActualState"><a class="viewcode-back" href="../ablauf.html#ablauf.Automate.getActualState">[docs]</a>    <span class="k">def</span> <span class="nf">getActualState</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the actual state of the automate</span>
+
+<span class="sd">        :return: actual state</span>
+<span class="sd">        :rtype: ablauf.state</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">actualstate</span>
+
+</div>
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="Automate.setActualState"><a class="viewcode-back" href="../ablauf.html#ablauf.Automate.setActualState">[docs]</a>    <span class="k">def</span> <span class="nf">setActualState</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the actual state to a given state</span>
+
+<span class="sd">        :param state: the new state</span>
+<span class="sd">        :type state: ablauf.state</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">actualstate</span> <span class="o">=</span> <span class="n">state</span>
+
+</div>
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="Automate.getDebugMode"><a class="viewcode-back" href="../ablauf.html#ablauf.Automate.getDebugMode">[docs]</a>    <span class="k">def</span> <span class="nf">getDebugMode</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a boolean value to indicate if the debug mode is used</span>
+
+<span class="sd">        :return: debug mode</span>
+<span class="sd">        :rtype: boolean</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">debugmode</span>
+
+</div>
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="Automate.setDebugMode"><a class="viewcode-back" href="../ablauf.html#ablauf.Automate.setDebugMode">[docs]</a>    <span class="k">def</span> <span class="nf">setDebugMode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the debug mode. Either to True or False</span>
+
+<span class="sd">        :param mode: the new mode</span>
+<span class="sd">        :type: boolean</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">debugmode</span> <span class="o">=</span> <span class="n">mode</span>
+
+
+    <span class="c"># ----------------------------------------------------------------------------------------------------------------------</span>
+    <span class="c"># functions</span>
+    <span class="c"># ----------------------------------------------------------------------------------------------------------------------</span></div>
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="Automate.init"><a class="viewcode-back" href="../ablauf.html#ablauf.Automate.init">[docs]</a>    <span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize Ablauf</span>
+
+<span class="sd">        *Example:*</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            import ablauf as abl</span>
+<span class="sd">            # -------------------------------------------------------------</span>
+<span class="sd">            # Game State</span>
+<span class="sd">            # -------------------------------------------------------------</span>
+<span class="sd">            stState = State(&quot;State&quot;)</span>
+
+<span class="sd">            tFinishFromState = Transition(&quot;FinishFromState&quot;, &quot;End&quot;, None)</span>
+<span class="sd">            stState.addTransition(tFinishFromState)</span>
+
+<span class="sd">            # *************************************************************</span>
+<span class="sd">            # Ablauf initialization</span>
+<span class="sd">            # *************************************************************</span>
+<span class="sd">            abl.Automate.init()</span>
+
+<span class="sd">            # -------------- -----------------------------------------------</span>
+<span class="sd">            # Set Debug Level</span>
+<span class="sd">            # -------------------------------------------------------------</span>
+<span class="sd">            abl.Automate.setDebugMode(True)</span>
+
+<span class="sd">            # *************************************************************</span>
+<span class="sd">            # Start Ablauf state engine</span>
+<span class="sd">            # *************************************************************</span>
+<span class="sd">            abl.Automate.start(&quot;State&quot;)</span>
+<span class="sd">            abl.Automate.transit(&quot;FinishFromState&quot;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;initialize Ablauf&quot;</span><span class="p">)</span>
+
+</div>
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="Automate.exit"><a class="viewcode-back" href="../ablauf.html#ablauf.Automate.exit">[docs]</a>    <span class="k">def</span> <span class="nf">exit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Exit the Ablauf State Engine</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;-----------------------------&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&#39;finishing Ablauf&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;-----------------------------&quot;</span><span class="p">)</span>
+
+</div>
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="Automate.addState"><a class="viewcode-back" href="../ablauf.html#ablauf.Automate.addState">[docs]</a>    <span class="k">def</span> <span class="nf">addState</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add a State to the list of states</span>
+
+<span class="sd">        :param state: The new state that is added to the list of states</span>
+<span class="sd">        :type state: ablauf.state</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">getStates</span><span class="p">()[</span><span class="n">state</span><span class="o">.</span><span class="n">getName</span><span class="p">()]</span> <span class="o">=</span> <span class="n">state</span>
+
+</div>
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="Automate.getState"><a class="viewcode-back" href="../ablauf.html#ablauf.Automate.getState">[docs]</a>    <span class="k">def</span> <span class="nf">getState</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">statename</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get a state from the list of states</span>
+
+<span class="sd">        :param statename: the name of the state</span>
+<span class="sd">        :type statename: string</span>
+<span class="sd">        :return: the state</span>
+<span class="sd">        :rtype: ablauf.state</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">getStates</span><span class="p">()[</span><span class="n">statename</span><span class="p">]</span>
+
+</div>
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="Automate.transit"><a class="viewcode-back" href="../ablauf.html#ablauf.Automate.transit">[docs]</a>    <span class="k">def</span> <span class="nf">transit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transitionname</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Do a transition to given state</span>
+
+<span class="sd">        :param transitionname: the name of the new state</span>
+<span class="sd">        :type transitionname: string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">source</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getActualState</span><span class="p">()</span>
+        <span class="n">transition</span> <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="n">getTransition</span><span class="p">(</span><span class="n">transitionname</span><span class="p">)</span>
+        <span class="n">destination</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getStates</span><span class="p">()[</span><span class="n">transition</span><span class="o">.</span><span class="n">getDestinationName</span><span class="p">()]</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">source</span><span class="o">.</span><span class="n">leave</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">source</span><span class="o">.</span><span class="n">leave</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;|------------------Transit to------------------|:&quot;</span> <span class="o">+</span> <span class="n">destination</span><span class="o">.</span><span class="n">getName</span><span class="p">())</span>
+        <span class="n">transition</span><span class="o">.</span><span class="n">fire</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">destination</span><span class="o">.</span><span class="n">enter</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">destination</span><span class="o">.</span><span class="n">enter</span><span class="p">()</span>
+
+        <span class="c"># Set new Stage &amp; Controller &amp; View function</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setActualState</span><span class="p">(</span><span class="n">destination</span><span class="p">)</span>
+
+</div>
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="Automate.start"><a class="viewcode-back" href="../ablauf.html#ablauf.Automate.start">[docs]</a>    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">firststatename</span><span class="p">,</span><span class="n">initfunction</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        starts the processing of the main loop</span>
+
+<span class="sd">        :param firststatename: the name of the first state</span>
+<span class="sd">        :type firststatename: string</span>
+<span class="sd">        :param initfuction: the name of the function that is called during the transition from the Start state to the first state</span>
+<span class="sd">        :type initfuction: function</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">_stStart</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="s">&quot;Start&quot;</span><span class="p">)</span>
+        <span class="n">_tGoFirst</span> <span class="o">=</span> <span class="n">Transition</span><span class="p">(</span><span class="s">&quot;GotoFirstState&quot;</span><span class="p">,</span> <span class="n">firststatename</span><span class="p">,</span> <span class="n">initfunction</span><span class="p">)</span>
+
+        <span class="n">_stStart</span><span class="o">.</span><span class="n">addTransition</span><span class="p">(</span><span class="n">_tGoFirst</span><span class="p">)</span>
+
+        <span class="n">_stEnd</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="s">&quot;End&quot;</span><span class="p">)</span>
+        <span class="n">_stEnd</span><span class="o">.</span><span class="n">setEnterFunction</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">exit</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;-----------------------------&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;start Ablauf state engine&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;-----------------------------&quot;</span><span class="p">)</span>
+
+        <span class="c"># set first state and transit to this stage</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setActualState</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">getState</span><span class="p">(</span><span class="s">&quot;Start&quot;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transit</span><span class="p">(</span><span class="s">&quot;GotoFirstState&quot;</span><span class="p">)</span>
+
+</div>
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="Automate.log"><a class="viewcode-back" href="../ablauf.html#ablauf.Automate.log">[docs]</a>    <span class="k">def</span> <span class="nf">log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Print a nessage to the console. If debugmode=true the message will be send to the javascript console.</span>
+
+<span class="sd">        :param message: the message to print</span>
+<span class="sd">        :type message: string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">getDebugMode</span><span class="p">()</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+
+</div></div>
+<div class="viewcode-block" id="State"><a class="viewcode-back" href="../ablauf.html#ablauf.State">[docs]</a><span class="k">class</span> <span class="nc">State</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A defined state in the life cycle of a program. Could have a enter and a leaving function defined.</span>
+
+<span class="sd">    *Example:*</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        # -------------------------------------------------------------</span>
+<span class="sd">        # Game State</span>
+<span class="sd">        # -------------------------------------------------------------</span>
+<span class="sd">        stState = State(&quot;State&quot;)</span>
+
+<span class="sd">        tFinishFromState = Transition(&quot;FinishFromState&quot;, &quot;End&quot;, None)</span>
+<span class="sd">        stState.addTransition(tFinishFromState)</span>
+
+<span class="sd">    :param name: the name of the state</span>
+<span class="sd">    :type name: string</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="State.defaultenterfunction"><a class="viewcode-back" href="../ablauf.html#ablauf.State.defaultenterfunction">[docs]</a>    <span class="k">def</span> <span class="nf">defaultenterfunction</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The default enter function. If no enter function is defined, this function will be called. It do nothing, but log it&#39;s call</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">Automate</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;Entering:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="State.defaultleavefunction"><a class="viewcode-back" href="../ablauf.html#ablauf.State.defaultleavefunction">[docs]</a>    <span class="k">def</span> <span class="nf">defaultleavefunction</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The default leave function. If no leave function is defined, this function will be called. It do nothing, but log it&#39;s call</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">Automate</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;Leaving:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+</div>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A state inside the state engine.</span>
+
+<span class="sd">        :param name: the name of the state</span>
+<span class="sd">        :type name: string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transitions</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">enterfunction</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">defaultenterfunction</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">leavefunction</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">defaultleavefunction</span>
+
+        <span class="n">Automate</span><span class="o">.</span><span class="n">addState</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="State.getName"><a class="viewcode-back" href="../ablauf.html#ablauf.State.getName">[docs]</a>    <span class="k">def</span> <span class="nf">getName</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the name of the state</span>
+
+<span class="sd">        :return: the name of the state</span>
+<span class="sd">        :rtype: string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+</div>
+<div class="viewcode-block" id="State.enter"><a class="viewcode-back" href="../ablauf.html#ablauf.State.enter">[docs]</a>    <span class="k">def</span> <span class="nf">enter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Call the enter function. This will happen automatically when a transition to the state happens</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">enterfunction</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="State.leave"><a class="viewcode-back" href="../ablauf.html#ablauf.State.leave">[docs]</a>    <span class="k">def</span> <span class="nf">leave</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Call the leave function. This will happen automatically when a transition is triggered</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">leavefunction</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="State.addTransition"><a class="viewcode-back" href="../ablauf.html#ablauf.State.addTransition">[docs]</a>    <span class="k">def</span> <span class="nf">addTransition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transition</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add a transition to the state.</span>
+
+<span class="sd">        :param transition: the ransition to add</span>
+<span class="sd">        :type transition: ablauf.Transition</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">transitions</span><span class="p">[</span><span class="n">transition</span><span class="o">.</span><span class="n">getName</span><span class="p">()]</span> <span class="o">=</span> <span class="n">transition</span>
+</div>
+<div class="viewcode-block" id="State.getTransition"><a class="viewcode-back" href="../ablauf.html#ablauf.State.getTransition">[docs]</a>    <span class="k">def</span> <span class="nf">getTransition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transitionname</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the transition of the state with the given transition name</span>
+
+<span class="sd">        :param transitionname: the name of the transition to get</span>
+<span class="sd">        :type transitionname: string</span>
+<span class="sd">        :return: the transition</span>
+<span class="sd">        :rtype: ablauf.Transition</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transitions</span><span class="p">[</span><span class="n">transitionname</span><span class="p">]</span>
+</div>
+<div class="viewcode-block" id="State.setEnterFunction"><a class="viewcode-back" href="../ablauf.html#ablauf.State.setEnterFunction">[docs]</a>    <span class="k">def</span> <span class="nf">setEnterFunction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">enterfunction</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the enter function. This function will be called automatically when a transition to the state happens</span>
+
+<span class="sd">        :param enterfunction: the enterfuncton</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">enterfunction</span> <span class="o">=</span> <span class="n">enterfunction</span>
+</div>
+<div class="viewcode-block" id="State.setLeaveFunction"><a class="viewcode-back" href="../ablauf.html#ablauf.State.setLeaveFunction">[docs]</a>    <span class="k">def</span> <span class="nf">setLeaveFunction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">leavefunction</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the leave function. This function will be called automaticaly when a transition formthe state happends</span>
+
+<span class="sd">        :param leavefunction: the leave function</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">leavefunction</span> <span class="o">=</span> <span class="n">leavefunction</span>
+
+</div></div>
+<div class="viewcode-block" id="Transition"><a class="viewcode-back" href="../ablauf.html#ablauf.Transition">[docs]</a><span class="k">class</span> <span class="nc">Transition</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A path from one state to another. It could have a transition function defined</span>
+
+<span class="sd">    *Example:*</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        tFinishFromState = Transition(&quot;FinishFromState&quot;, &quot;End&quot;, None)</span>
+
+<span class="sd">    :param name Set the name of the new transition</span>
+<span class="sd">    :type name: string</span>
+<span class="sd">    :param destinationname: name of the destination state</span>
+<span class="sd">    :type destinationname: string</span>
+<span class="sd">    :param funct: The function that will be called when the transition is triggered</span>
+<span class="sd">    :type funct: function</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">destinationname</span><span class="p">,</span> <span class="n">funct</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A transition inside the state engine.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">destinationname</span> <span class="o">=</span> <span class="n">destinationname</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">funct</span> <span class="o">=</span> <span class="n">funct</span>
+
+<div class="viewcode-block" id="Transition.getName"><a class="viewcode-back" href="../ablauf.html#ablauf.Transition.getName">[docs]</a>    <span class="k">def</span> <span class="nf">getName</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the name of the transition</span>
+
+<span class="sd">        :return: name The name of the transition</span>
+<span class="sd">        :rtype: string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+</div>
+<div class="viewcode-block" id="Transition.getDestinationName"><a class="viewcode-back" href="../ablauf.html#ablauf.Transition.getDestinationName">[docs]</a>    <span class="k">def</span> <span class="nf">getDestinationName</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the destination name of the transition</span>
+
+<span class="sd">        :return: The destinationname of the transition</span>
+<span class="sd">        :rtype: string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">destinationname</span>
+</div>
+<div class="viewcode-block" id="Transition.fire"><a class="viewcode-back" href="../ablauf.html#ablauf.Transition.fire">[docs]</a>    <span class="k">def</span> <span class="nf">fire</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calls the function of the transition</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">Automate</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;Firing transition function&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">funct</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">funct</span><span class="p">()</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">.  documentation</a> &raquo;</li>
+          <li><a href="index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, ThorN.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

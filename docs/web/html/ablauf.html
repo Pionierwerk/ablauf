@@ -1,0 +1,503 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ablauf package &mdash; .  documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title=".  documentation" href="index.html" />
+    <link rel="prev" title="Welcome to .’s documentation!" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to .’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">.  documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="ablauf-package">
+<h1>ablauf package<a class="headerlink" href="#ablauf-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-ablauf">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-ablauf" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="ablauf.Automate">
+<em class="property">class </em><tt class="descclassname">ablauf.</tt><tt class="descname">Automate</tt><a class="reference internal" href="_modules/ablauf.html#Automate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ablauf.Automate" title="Permalink to this definition">¶</a></dt>
+<dd><p>The functions of the automate are:</p>
+<ul class="simple">
+<li>initialize the state engine</li>
+<li>stores the states</li>
+<li>trigger a transit from one state to another state via a transition</li>
+</ul>
+<dl class="classmethod">
+<dt id="ablauf.Automate.addState">
+<em class="property">classmethod </em><tt class="descname">addState</tt><big>(</big><em>state</em><big>)</big><a class="reference internal" href="_modules/ablauf.html#Automate.addState"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ablauf.Automate.addState" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a State to the list of states</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>state</strong> (<em>ablauf.state</em>) &#8211; The new state that is added to the list of states</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="ablauf.Automate.exit">
+<em class="property">classmethod </em><tt class="descname">exit</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/ablauf.html#Automate.exit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ablauf.Automate.exit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exit the Ablauf State Engine</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="ablauf.Automate.getActualState">
+<em class="property">classmethod </em><tt class="descname">getActualState</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/ablauf.html#Automate.getActualState"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ablauf.Automate.getActualState" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the actual state of the automate</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">actual state</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">ablauf.state</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="ablauf.Automate.getDebugMode">
+<em class="property">classmethod </em><tt class="descname">getDebugMode</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/ablauf.html#Automate.getDebugMode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ablauf.Automate.getDebugMode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a boolean value to indicate if the debug mode is used</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">debug mode</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">boolean</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="ablauf.Automate.getState">
+<em class="property">classmethod </em><tt class="descname">getState</tt><big>(</big><em>statename</em><big>)</big><a class="reference internal" href="_modules/ablauf.html#Automate.getState"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ablauf.Automate.getState" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a state from the list of states</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>statename</strong> (<em>string</em>) &#8211; the name of the state</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the state</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ablauf.state</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="ablauf.Automate.getStates">
+<em class="property">classmethod </em><tt class="descname">getStates</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/ablauf.html#Automate.getStates"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ablauf.Automate.getStates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the list of states</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of states</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="ablauf.Automate.init">
+<em class="property">classmethod </em><tt class="descname">init</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/ablauf.html#Automate.init"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ablauf.Automate.init" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize Ablauf</p>
+<p><em>Example:</em></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">ablauf</span> <span class="kn">as</span> <span class="nn">abl</span>
+<span class="c"># -------------------------------------------------------------</span>
+<span class="c"># Game State</span>
+<span class="c"># -------------------------------------------------------------</span>
+<span class="n">stState</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="s">&quot;State&quot;</span><span class="p">)</span>
+
+<span class="n">tFinishFromState</span> <span class="o">=</span> <span class="n">Transition</span><span class="p">(</span><span class="s">&quot;FinishFromState&quot;</span><span class="p">,</span> <span class="s">&quot;End&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+<span class="n">stState</span><span class="o">.</span><span class="n">addTransition</span><span class="p">(</span><span class="n">tFinishFromState</span><span class="p">)</span>
+
+<span class="c"># *************************************************************</span>
+<span class="c"># Ablauf initialization</span>
+<span class="c"># *************************************************************</span>
+<span class="n">abl</span><span class="o">.</span><span class="n">Automate</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+
+<span class="c"># -------------- -----------------------------------------------</span>
+<span class="c"># Set Debug Level</span>
+<span class="c"># -------------------------------------------------------------</span>
+<span class="n">abl</span><span class="o">.</span><span class="n">Automate</span><span class="o">.</span><span class="n">setDebugMode</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c"># *************************************************************</span>
+<span class="c"># Start Ablauf state engine</span>
+<span class="c"># *************************************************************</span>
+<span class="n">abl</span><span class="o">.</span><span class="n">Automate</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s">&quot;State&quot;</span><span class="p">)</span>
+<span class="n">abl</span><span class="o">.</span><span class="n">Automate</span><span class="o">.</span><span class="n">transit</span><span class="p">(</span><span class="s">&quot;FinishFromState&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="ablauf.Automate.log">
+<em class="property">classmethod </em><tt class="descname">log</tt><big>(</big><em>message</em><big>)</big><a class="reference internal" href="_modules/ablauf.html#Automate.log"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ablauf.Automate.log" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print a nessage to the console. If debugmode=true the message will be send to the javascript console.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>message</strong> (<em>string</em>) &#8211; the message to print</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="ablauf.Automate.setActualState">
+<em class="property">classmethod </em><tt class="descname">setActualState</tt><big>(</big><em>state</em><big>)</big><a class="reference internal" href="_modules/ablauf.html#Automate.setActualState"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ablauf.Automate.setActualState" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the actual state to a given state</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>state</strong> (<em>ablauf.state</em>) &#8211; the new state</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="ablauf.Automate.setDebugMode">
+<em class="property">classmethod </em><tt class="descname">setDebugMode</tt><big>(</big><em>mode</em><big>)</big><a class="reference internal" href="_modules/ablauf.html#Automate.setDebugMode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ablauf.Automate.setDebugMode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the debug mode. Either to True or False</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>mode</strong> &#8211; the new mode</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Type:</th><td class="field-body">boolean</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="ablauf.Automate.start">
+<em class="property">classmethod </em><tt class="descname">start</tt><big>(</big><em>firststatename</em>, <em>initfunction</em><big>)</big><a class="reference internal" href="_modules/ablauf.html#Automate.start"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ablauf.Automate.start" title="Permalink to this definition">¶</a></dt>
+<dd><p>starts the processing of the main loop</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>firststatename</strong> (<em>string</em>) &#8211; the name of the first state</li>
+<li><strong>initfuction</strong> (<em>function</em>) &#8211; the name of the function that is called during the transition from the Start state to the first state</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="ablauf.Automate.transit">
+<em class="property">classmethod </em><tt class="descname">transit</tt><big>(</big><em>transitionname</em><big>)</big><a class="reference internal" href="_modules/ablauf.html#Automate.transit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ablauf.Automate.transit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Do a transition to given state</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>transitionname</strong> (<em>string</em>) &#8211; the name of the new state</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="ablauf.State">
+<em class="property">class </em><tt class="descclassname">ablauf.</tt><tt class="descname">State</tt><big>(</big><em>name</em><big>)</big><a class="reference internal" href="_modules/ablauf.html#State"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ablauf.State" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>A defined state in the life cycle of a program. Could have a enter and a leaving function defined.</p>
+<p><em>Example:</em></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># -------------------------------------------------------------</span>
+<span class="c"># Game State</span>
+<span class="c"># -------------------------------------------------------------</span>
+<span class="n">stState</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="s">&quot;State&quot;</span><span class="p">)</span>
+
+<span class="n">tFinishFromState</span> <span class="o">=</span> <span class="n">Transition</span><span class="p">(</span><span class="s">&quot;FinishFromState&quot;</span><span class="p">,</span> <span class="s">&quot;End&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+<span class="n">stState</span><span class="o">.</span><span class="n">addTransition</span><span class="p">(</span><span class="n">tFinishFromState</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<em>string</em>) &#8211; the name of the state</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="ablauf.State.addTransition">
+<tt class="descname">addTransition</tt><big>(</big><em>transition</em><big>)</big><a class="reference internal" href="_modules/ablauf.html#State.addTransition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ablauf.State.addTransition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a transition to the state.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>transition</strong> (<a class="reference internal" href="#ablauf.Transition" title="ablauf.Transition"><em>ablauf.Transition</em></a>) &#8211; the ransition to add</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ablauf.State.defaultenterfunction">
+<tt class="descname">defaultenterfunction</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/ablauf.html#State.defaultenterfunction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ablauf.State.defaultenterfunction" title="Permalink to this definition">¶</a></dt>
+<dd><p>The default enter function. If no enter function is defined, this function will be called. It do nothing, but log it&#8217;s call</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ablauf.State.defaultleavefunction">
+<tt class="descname">defaultleavefunction</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/ablauf.html#State.defaultleavefunction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ablauf.State.defaultleavefunction" title="Permalink to this definition">¶</a></dt>
+<dd><p>The default leave function. If no leave function is defined, this function will be called. It do nothing, but log it&#8217;s call</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ablauf.State.enter">
+<tt class="descname">enter</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/ablauf.html#State.enter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ablauf.State.enter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call the enter function. This will happen automatically when a transition to the state happens</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ablauf.State.getName">
+<tt class="descname">getName</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/ablauf.html#State.getName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ablauf.State.getName" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the name of the state</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the name of the state</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ablauf.State.getTransition">
+<tt class="descname">getTransition</tt><big>(</big><em>transitionname</em><big>)</big><a class="reference internal" href="_modules/ablauf.html#State.getTransition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ablauf.State.getTransition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the transition of the state with the given transition name</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>transitionname</strong> (<em>string</em>) &#8211; the name of the transition to get</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the transition</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ablauf.Transition</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ablauf.State.leave">
+<tt class="descname">leave</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/ablauf.html#State.leave"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ablauf.State.leave" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call the leave function. This will happen automatically when a transition is triggered</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ablauf.State.setEnterFunction">
+<tt class="descname">setEnterFunction</tt><big>(</big><em>enterfunction</em><big>)</big><a class="reference internal" href="_modules/ablauf.html#State.setEnterFunction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ablauf.State.setEnterFunction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the enter function. This function will be called automatically when a transition to the state happens</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>enterfunction</strong> &#8211; the enterfuncton</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ablauf.State.setLeaveFunction">
+<tt class="descname">setLeaveFunction</tt><big>(</big><em>leavefunction</em><big>)</big><a class="reference internal" href="_modules/ablauf.html#State.setLeaveFunction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ablauf.State.setLeaveFunction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the leave function. This function will be called automaticaly when a transition formthe state happends</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>leavefunction</strong> &#8211; the leave function</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="ablauf.Transition">
+<em class="property">class </em><tt class="descclassname">ablauf.</tt><tt class="descname">Transition</tt><big>(</big><em>name</em>, <em>destinationname</em>, <em>funct</em><big>)</big><a class="reference internal" href="_modules/ablauf.html#Transition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ablauf.Transition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>A path from one state to another. It could have a transition function defined</p>
+<p><em>Example:</em></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">tFinishFromState</span> <span class="o">=</span> <span class="n">Transition</span><span class="p">(</span><span class="s">&quot;FinishFromState&quot;</span><span class="p">,</span> <span class="s">&quot;End&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>:param name Set the name of the new transition
+:type name: string
+:param destinationname: name of the destination state
+:type destinationname: string
+:param funct: The function that will be called when the transition is triggered
+:type funct: function</p>
+<dl class="method">
+<dt id="ablauf.Transition.fire">
+<tt class="descname">fire</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/ablauf.html#Transition.fire"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ablauf.Transition.fire" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the function of the transition</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ablauf.Transition.getDestinationName">
+<tt class="descname">getDestinationName</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/ablauf.html#Transition.getDestinationName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ablauf.Transition.getDestinationName" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the destination name of the transition</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The destinationname of the transition</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ablauf.Transition.getName">
+<tt class="descname">getName</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/ablauf.html#Transition.getName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ablauf.Transition.getName" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the name of the transition</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">name The name of the transition</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">ablauf package</a><ul>
+<li><a class="reference internal" href="#module-ablauf">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to .&#8217;s documentation!</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/ablauf.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to .’s documentation!"
+             >previous</a> |</li>
+        <li><a href="index.html">.  documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, ThorN.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>
