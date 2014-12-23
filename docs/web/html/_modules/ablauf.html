@@ -48,7 +48,7 @@
             
   <h1>Source code for ablauf</h1><div class="highlight"><pre>
 <span class="c"># ----------------------------------------------------------------------------------------------------------------------</span>
-<span class="c"># The #1_Automate module</span>
+<span class="c"># The Automate module</span>
 <span class="c"># ----------------------------------------------------------------------------------------------------------------------</span>
 <div class="viewcode-block" id="Automate"><a class="viewcode-back" href="../ablauf.html#ablauf.Automate">[docs]</a><span class="k">class</span> <span class="nc">Automate</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -228,6 +228,15 @@
 <div class="viewcode-block" id="Automate.start"><a class="viewcode-back" href="../ablauf.html#ablauf.Automate.start">[docs]</a>    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">firststatename</span><span class="p">,</span><span class="n">initfunction</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        starts the processing of the main loop</span>
+
+<span class="sd">        *Example:*</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">        def initfunction():</span>
+<span class="sd">            Automate.log(&quot;Process initfunction&quot;)</span>
+
+<span class="sd">        Automate.start(&quot;Menu&quot;,initfunction)</span>
 
 <span class="sd">        :param firststatename: the name of the first state</span>
 <span class="sd">        :type firststatename: string</span>

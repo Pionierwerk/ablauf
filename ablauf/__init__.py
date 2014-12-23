@@ -1,5 +1,5 @@
 # ----------------------------------------------------------------------------------------------------------------------
-# The #1_Automate module
+# The Automate module
 # ----------------------------------------------------------------------------------------------------------------------
 class Automate():
     """
@@ -179,6 +179,15 @@ class Automate():
     def start(self, firststatename,initfunction):
         """
         starts the processing of the main loop
+
+        *Example:*
+
+        .. code-block:: python
+
+        def initfunction():
+            Automate.log("Process initfunction")
+
+        Automate.start("Menu",initfunction)
 
         :param firststatename: the name of the first state
         :type firststatename: string
