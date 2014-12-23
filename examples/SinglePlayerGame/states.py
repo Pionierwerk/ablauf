@@ -13,56 +13,56 @@ from ablauf import Automate, State, Transition
 # -----------------------------------------------------------------------------
 # Menu state
 # -----------------------------------------------------------------------------
-stMenu = State("Menu")
+Menu = State("Menu")
 
 # Transition to Options
-tShowOptions = Transition("ShowOptions", "Options", None)
-stMenu.addTransition(tShowOptions)
+ShowOptions = Transition("ShowOptions", "Options", None)
+Menu.addTransition(ShowOptions)
 
 # Transition to Options
-tShowHighscores = Transition("ShowHighscores", "Highscore", None)
-stMenu.addTransition(tShowHighscores)
+ShowHighscores = Transition("ShowHighscores", "Highscore", None)
+Menu.addTransition(ShowHighscores)
 
 # Transition to Game
-tStartGame = Transition("StartGame", "Game", None)
-stMenu.addTransition(tStartGame)
+StartGame = Transition("StartGame", "Game", None)
+Menu.addTransition(StartGame)
 
 # Transition to End
-tFinishFromMenu = Transition("FinishFromMenu", "End", None)
-stMenu.addTransition(tFinishFromMenu)
+FinishFromMenu = Transition("FinishFromMenu", "End", None)
+Menu.addTransition(FinishFromMenu)
 
 # -----------------------------------------------------------------------------
 # Options state
 # -----------------------------------------------------------------------------
-stOptions = State("Options")
+Options = State("Options")
 
 # Transition to Menu
-tBackToMenu = Transition("BackToMenu", "Menu", None)
-stOptions.addTransition(tBackToMenu)
+BackToMenu = Transition("BackToMenu", "Menu", None)
+Options.addTransition(BackToMenu)
 
 # -----------------------------------------------------------------------------
 # Game state
 # -----------------------------------------------------------------------------
-stGame = State("Game")
+Game = State("Game")
 
 # Transition to Highscore
-tShowHighscore = Transition("ShowHighscore", "Highscore", None)
-stGame.addTransition(tShowHighscore)
+ShowHighscore = Transition("ShowHighscore", "Highscore", None)
+Game.addTransition(ShowHighscore)
 
 
 # Leave Function: put the highscore into the leaderboard
-def stGameLeaveFunction():
+def GameLeaveFunction():
     Automate.log("Game leave function")
     Automate.log("-- Code would -> Put the highscore into the leaderboard")
 
 
-stGame.setLeaveFunction(stGameLeaveFunction)
+Game.setLeaveFunction(GameLeaveFunction)
 
 # -----------------------------------------------------------------------------
 # Highscore state
 # -----------------------------------------------------------------------------
-stHighscore = State("Highscore")
+Highscore = State("Highscore")
 
 # Transition to Menu
-tGameOver = Transition("BackToMenu", "Menu", None)
-stHighscore.addTransition(tGameOver)
+GameOver = Transition("BackToMenu", "Menu", None)
+Highscore.addTransition(GameOver)

@@ -88,10 +88,10 @@ class Automate():
             # -------------------------------------------------------------
             # Game State
             # -------------------------------------------------------------
-            stState = State("State")
+            StartState = State("StartState")
 
-            tFinishFromState = Transition("FinishFromState", "End", None)
-            stState.addTransition(tFinishFromState)
+            FinishFromState = Transition("FinishFromState", "End", None)
+            StartState.addTransition(FinishFromState)
 
             # *************************************************************
             # Ablauf initialization
@@ -106,7 +106,7 @@ class Automate():
             # *************************************************************
             # Start Ablauf state engine
             # *************************************************************
-            Automate.start("State")
+            Automate.start("StartState")
             Automate.transit("FinishFromState")
         """
 
@@ -185,23 +185,23 @@ class Automate():
 
         .. code-block:: python
 
-        def initfunction():
-            Automate.log("Process initfunction")
+            def initfunction():
+                Automate.log("Processing init function")
 
-        Automate.start("Menu",initfunction)
+            Automate.start("StartState",initfunction)
 
         :param firststatename: the name of the first state
         :type firststatename: string
         :param initfuction: the name of the function that is called during the transition from the Start state to the first state
         :type initfuction: function
         """
-        _stStart = State("Start")
-        _tGoFirst = Transition("GotoFirstState", firststatename, initfunction)
+        _Start = State("Start")
+        _GoFirst = Transition("GotoFirstState", firststatename, initfunction)
 
-        _stStart.addTransition(_tGoFirst)
+        _Start.addTransition(_GoFirst)
 
-        _stEnd = State("End")
-        _stEnd.setEnterFunction(self.exit)
+        _End = State("End")
+        _End.setEnterFunction(self.exit)
 
         self.log("-----------------------------")
         self.log("start Ablauf state engine")
@@ -233,13 +233,10 @@ class State(object):
 
     .. code-block:: python
 
-        # -------------------------------------------------------------
-        # Game State
-        # -------------------------------------------------------------
-        stState = State("State")
+        StartState = State("StartState")
 
-        tFinishFromState = Transition("FinishFromState", "End", None)
-        stState.addTransition(tFinishFromState)
+        FinishFromState = Transition("FinishFromState", "End", None)
+        StartState.addTransition(FinishFromState)
 
     :param name: the name of the state
     :type name: string
@@ -323,6 +320,15 @@ class State(object):
         """
         Set the enter function. This function will be called automatically when a transition to the state happens
 
+        *Example:*
+
+        .. code-block:: python
+
+            def StateEnterFunction():
+                Automate.log("Game enter function")
+
+            StartState.setEnterFunction(StateEnterFunction)
+
         :param enterfunction: the enterfuncton
         """
 
@@ -331,6 +337,15 @@ class State(object):
     def setLeaveFunction(self, leavefunction):
         """
         Set the leave function. This function will be called automaticaly when a transition formthe state happends
+
+        *Example:*
+
+        .. code-block:: python
+
+            def StateLeaveFunction():
+                Automate.log("Game leave function")
+
+            StartState.setLeaveFunction(StateLeaveFunction)
 
         :param leavefunction: the leave function
         """
@@ -359,6 +374,18 @@ class Transition(object):
     def __init__(self, name, destinationname, funct):
         """
         A transition inside the state engine.
+
+        *Example:*
+
+        .. code-block:: python
+
+            def initfunction():
+                Automate.log("Processing init function")
+
+            _Start = State("Start")
+            _GoFirst = Transition("GotoFirstState", firststatename, initfunction)
+
+            _Start.addTransition(_GoFirst)
         """
 
         self.name = name

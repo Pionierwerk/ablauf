@@ -12,7 +12,7 @@ from ablauf import State, Transition
 # -------------------------------------------------------------
 # Game State
 # -------------------------------------------------------------
-stState = State("State")
+StartState = State("State")
 
-tFinishFromState = Transition("FinishFromState", "End", None)
-stState.addTransition(tFinishFromState)
+FinishFromState = Transition("FinishFromState", "End", None)
+StartState.addTransition(FinishFromState)
