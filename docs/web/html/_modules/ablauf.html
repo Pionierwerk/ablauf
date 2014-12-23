@@ -137,10 +137,10 @@
 <span class="sd">            # -------------------------------------------------------------</span>
 <span class="sd">            # Game State</span>
 <span class="sd">            # -------------------------------------------------------------</span>
-<span class="sd">            stState = State(&quot;State&quot;)</span>
+<span class="sd">            StartState = State(&quot;StartState&quot;)</span>
 
-<span class="sd">            tFinishFromState = Transition(&quot;FinishFromState&quot;, &quot;End&quot;, None)</span>
-<span class="sd">            stState.addTransition(tFinishFromState)</span>
+<span class="sd">            FinishFromState = Transition(&quot;FinishFromState&quot;, &quot;End&quot;, None)</span>
+<span class="sd">            StartState.addTransition(FinishFromState)</span>
 
 <span class="sd">            # *************************************************************</span>
 <span class="sd">            # Ablauf initialization</span>
@@ -155,7 +155,7 @@
 <span class="sd">            # *************************************************************</span>
 <span class="sd">            # Start Ablauf state engine</span>
 <span class="sd">            # *************************************************************</span>
-<span class="sd">            Automate.start(&quot;State&quot;)</span>
+<span class="sd">            Automate.start(&quot;StartState&quot;)</span>
 <span class="sd">            Automate.transit(&quot;FinishFromState&quot;)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -234,23 +234,23 @@
 
 <span class="sd">        .. code-block:: python</span>
 
-<span class="sd">        def initfunction():</span>
-<span class="sd">            Automate.log(&quot;Process initfunction&quot;)</span>
+<span class="sd">            def initfunction():</span>
+<span class="sd">                Automate.log(&quot;Processing init function&quot;)</span>
 
-<span class="sd">        Automate.start(&quot;Menu&quot;,initfunction)</span>
+<span class="sd">            Automate.start(&quot;StartState&quot;,initfunction)</span>
 
 <span class="sd">        :param firststatename: the name of the first state</span>
 <span class="sd">        :type firststatename: string</span>
 <span class="sd">        :param initfuction: the name of the function that is called during the transition from the Start state to the first state</span>
 <span class="sd">        :type initfuction: function</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">_stStart</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="s">&quot;Start&quot;</span><span class="p">)</span>
-        <span class="n">_tGoFirst</span> <span class="o">=</span> <span class="n">Transition</span><span class="p">(</span><span class="s">&quot;GotoFirstState&quot;</span><span class="p">,</span> <span class="n">firststatename</span><span class="p">,</span> <span class="n">initfunction</span><span class="p">)</span>
+        <span class="n">_Start</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="s">&quot;Start&quot;</span><span class="p">)</span>
+        <span class="n">_GoFirst</span> <span class="o">=</span> <span class="n">Transition</span><span class="p">(</span><span class="s">&quot;GotoFirstState&quot;</span><span class="p">,</span> <span class="n">firststatename</span><span class="p">,</span> <span class="n">initfunction</span><span class="p">)</span>
 
-        <span class="n">_stStart</span><span class="o">.</span><span class="n">addTransition</span><span class="p">(</span><span class="n">_tGoFirst</span><span class="p">)</span>
+        <span class="n">_Start</span><span class="o">.</span><span class="n">addTransition</span><span class="p">(</span><span class="n">_GoFirst</span><span class="p">)</span>
 
-        <span class="n">_stEnd</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="s">&quot;End&quot;</span><span class="p">)</span>
-        <span class="n">_stEnd</span><span class="o">.</span><span class="n">setEnterFunction</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">exit</span><span class="p">)</span>
+        <span class="n">_End</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="s">&quot;End&quot;</span><span class="p">)</span>
+        <span class="n">_End</span><span class="o">.</span><span class="n">setEnterFunction</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">exit</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;-----------------------------&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;start Ablauf state engine&quot;</span><span class="p">)</span>
@@ -282,13 +282,10 @@
 
 <span class="sd">    .. code-block:: python</span>
 
-<span class="sd">        # -------------------------------------------------------------</span>
-<span class="sd">        # Game State</span>
-<span class="sd">        # -------------------------------------------------------------</span>
-<span class="sd">        stState = State(&quot;State&quot;)</span>
+<span class="sd">        StartState = State(&quot;StartState&quot;)</span>
 
-<span class="sd">        tFinishFromState = Transition(&quot;FinishFromState&quot;, &quot;End&quot;, None)</span>
-<span class="sd">        stState.addTransition(tFinishFromState)</span>
+<span class="sd">        FinishFromState = Transition(&quot;FinishFromState&quot;, &quot;End&quot;, None)</span>
+<span class="sd">        StartState.addTransition(FinishFromState)</span>
 
 <span class="sd">    :param name: the name of the state</span>
 <span class="sd">    :type name: string</span>
@@ -372,6 +369,15 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the enter function. This function will be called automatically when a transition to the state happens</span>
 
+<span class="sd">        *Example:*</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            def StateEnterFunction():</span>
+<span class="sd">                Automate.log(&quot;Game enter function&quot;)</span>
+
+<span class="sd">            StartState.setEnterFunction(StateEnterFunction)</span>
+
 <span class="sd">        :param enterfunction: the enterfuncton</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -380,6 +386,15 @@
 <div class="viewcode-block" id="State.setLeaveFunction"><a class="viewcode-back" href="../ablauf.html#ablauf.State.setLeaveFunction">[docs]</a>    <span class="k">def</span> <span class="nf">setLeaveFunction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">leavefunction</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the leave function. This function will be called automaticaly when a transition formthe state happends</span>
+
+<span class="sd">        *Example:*</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            def StateLeaveFunction():</span>
+<span class="sd">                Automate.log(&quot;Game leave function&quot;)</span>
+
+<span class="sd">            StartState.setLeaveFunction(StateLeaveFunction)</span>
 
 <span class="sd">        :param leavefunction: the leave function</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -408,6 +423,18 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">destinationname</span><span class="p">,</span> <span class="n">funct</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        A transition inside the state engine.</span>
+
+<span class="sd">        *Example:*</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            def initfunction():</span>
+<span class="sd">                Automate.log(&quot;Processing init function&quot;)</span>
+
+<span class="sd">            _Start = State(&quot;Start&quot;)</span>
+<span class="sd">            _GoFirst = Transition(&quot;GotoFirstState&quot;, firststatename, initfunction)</span>
+
+<span class="sd">            _Start.addTransition(_GoFirst)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>

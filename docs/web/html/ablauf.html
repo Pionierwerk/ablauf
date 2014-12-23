@@ -157,10 +157,10 @@
 <span class="c"># -------------------------------------------------------------</span>
 <span class="c"># Game State</span>
 <span class="c"># -------------------------------------------------------------</span>
-<span class="n">stState</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="s">&quot;State&quot;</span><span class="p">)</span>
+<span class="n">StartState</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="s">&quot;StartState&quot;</span><span class="p">)</span>
 
-<span class="n">tFinishFromState</span> <span class="o">=</span> <span class="n">Transition</span><span class="p">(</span><span class="s">&quot;FinishFromState&quot;</span><span class="p">,</span> <span class="s">&quot;End&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
-<span class="n">stState</span><span class="o">.</span><span class="n">addTransition</span><span class="p">(</span><span class="n">tFinishFromState</span><span class="p">)</span>
+<span class="n">FinishFromState</span> <span class="o">=</span> <span class="n">Transition</span><span class="p">(</span><span class="s">&quot;FinishFromState&quot;</span><span class="p">,</span> <span class="s">&quot;End&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+<span class="n">StartState</span><span class="o">.</span><span class="n">addTransition</span><span class="p">(</span><span class="n">FinishFromState</span><span class="p">)</span>
 
 <span class="c"># *************************************************************</span>
 <span class="c"># Ablauf initialization</span>
@@ -175,7 +175,7 @@
 <span class="c"># *************************************************************</span>
 <span class="c"># Start Ablauf state engine</span>
 <span class="c"># *************************************************************</span>
-<span class="n">Automate</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s">&quot;State&quot;</span><span class="p">)</span>
+<span class="n">Automate</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s">&quot;StartState&quot;</span><span class="p">)</span>
 <span class="n">Automate</span><span class="o">.</span><span class="n">transit</span><span class="p">(</span><span class="s">&quot;FinishFromState&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -230,14 +230,12 @@
 <em class="property">classmethod </em><tt class="descname">start</tt><big>(</big><em>firststatename</em>, <em>initfunction</em><big>)</big><a class="reference internal" href="_modules/ablauf.html#Automate.start"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ablauf.Automate.start" title="Permalink to this definition">¶</a></dt>
 <dd><p>starts the processing of the main loop</p>
 <p><em>Example:</em></p>
-<div class="highlight-python"><div class="highlight"><pre>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">initfunction</span><span class="p">():</span>
+    <span class="n">Automate</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;Processing init function&quot;</span><span class="p">)</span>
+
+<span class="n">Automate</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s">&quot;StartState&quot;</span><span class="p">,</span><span class="n">initfunction</span><span class="p">)</span>
 </pre></div>
 </div>
-<dl class="docutils">
-<dt>def initfunction():</dt>
-<dd>Automate.log(&#8220;Process initfunction&#8221;)</dd>
-</dl>
-<p>Automate.start(&#8220;Menu&#8221;,initfunction)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -274,13 +272,10 @@
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
 <p>A defined state in the life cycle of a program. Could have a enter and a leaving function defined.</p>
 <p><em>Example:</em></p>
-<div class="highlight-python"><div class="highlight"><pre><span class="c"># -------------------------------------------------------------</span>
-<span class="c"># Game State</span>
-<span class="c"># -------------------------------------------------------------</span>
-<span class="n">stState</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="s">&quot;State&quot;</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">StartState</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="s">&quot;StartState&quot;</span><span class="p">)</span>
 
-<span class="n">tFinishFromState</span> <span class="o">=</span> <span class="n">Transition</span><span class="p">(</span><span class="s">&quot;FinishFromState&quot;</span><span class="p">,</span> <span class="s">&quot;End&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
-<span class="n">stState</span><span class="o">.</span><span class="n">addTransition</span><span class="p">(</span><span class="n">tFinishFromState</span><span class="p">)</span>
+<span class="n">FinishFromState</span> <span class="o">=</span> <span class="n">Transition</span><span class="p">(</span><span class="s">&quot;FinishFromState&quot;</span><span class="p">,</span> <span class="s">&quot;End&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+<span class="n">StartState</span><span class="o">.</span><span class="n">addTransition</span><span class="p">(</span><span class="n">FinishFromState</span><span class="p">)</span>
 </pre></div>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
@@ -367,6 +362,13 @@
 <dt id="ablauf.State.setEnterFunction">
 <tt class="descname">setEnterFunction</tt><big>(</big><em>enterfunction</em><big>)</big><a class="reference internal" href="_modules/ablauf.html#State.setEnterFunction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ablauf.State.setEnterFunction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the enter function. This function will be called automatically when a transition to the state happens</p>
+<p><em>Example:</em></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">StateEnterFunction</span><span class="p">():</span>
+    <span class="n">Automate</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;Game enter function&quot;</span><span class="p">)</span>
+
+<span class="n">StartState</span><span class="o">.</span><span class="n">setEnterFunction</span><span class="p">(</span><span class="n">StateEnterFunction</span><span class="p">)</span>
+</pre></div>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -381,6 +383,13 @@
 <dt id="ablauf.State.setLeaveFunction">
 <tt class="descname">setLeaveFunction</tt><big>(</big><em>leavefunction</em><big>)</big><a class="reference internal" href="_modules/ablauf.html#State.setLeaveFunction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ablauf.State.setLeaveFunction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the leave function. This function will be called automaticaly when a transition formthe state happends</p>
+<p><em>Example:</em></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">StateLeaveFunction</span><span class="p">():</span>
+    <span class="n">Automate</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;Game leave function&quot;</span><span class="p">)</span>
+
+<span class="n">StartState</span><span class="o">.</span><span class="n">setLeaveFunction</span><span class="p">(</span><span class="n">StateLeaveFunction</span><span class="p">)</span>
+</pre></div>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
