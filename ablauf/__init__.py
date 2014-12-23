@@ -106,7 +106,7 @@ class Automate():
             # *************************************************************
             # Start Ablauf state engine
             # *************************************************************
-            Automate.start("StartState")
+            Automate.start("StartState",None)
             Automate.transit("FinishFromState")
         """
 
