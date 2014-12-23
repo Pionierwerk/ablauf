@@ -132,7 +132,8 @@
 
 <span class="sd">        .. code-block:: python</span>
 
-<span class="sd">            import ablauf as abl</span>
+<span class="sd">            from ablauf import Automate,State,Transition</span>
+
 <span class="sd">            # -------------------------------------------------------------</span>
 <span class="sd">            # Game State</span>
 <span class="sd">            # -------------------------------------------------------------</span>
@@ -144,18 +145,18 @@
 <span class="sd">            # *************************************************************</span>
 <span class="sd">            # Ablauf initialization</span>
 <span class="sd">            # *************************************************************</span>
-<span class="sd">            abl.Automate.init()</span>
+<span class="sd">            Automate.init()</span>
 
 <span class="sd">            # -------------- -----------------------------------------------</span>
 <span class="sd">            # Set Debug Level</span>
 <span class="sd">            # -------------------------------------------------------------</span>
-<span class="sd">            abl.Automate.setDebugMode(True)</span>
+<span class="sd">            Automate.setDebugMode(True)</span>
 
 <span class="sd">            # *************************************************************</span>
 <span class="sd">            # Start Ablauf state engine</span>
 <span class="sd">            # *************************************************************</span>
-<span class="sd">            abl.Automate.start(&quot;State&quot;)</span>
-<span class="sd">            abl.Automate.transit(&quot;FinishFromState&quot;)</span>
+<span class="sd">            Automate.start(&quot;State&quot;)</span>
+<span class="sd">            Automate.transit(&quot;FinishFromState&quot;)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;initialize Ablauf&quot;</span><span class="p">)</span>

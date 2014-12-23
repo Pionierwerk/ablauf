@@ -83,7 +83,8 @@ class Automate():
 
         .. code-block:: python
 
-            import ablauf as abl
+            from ablauf import Automate,State,Transition
+
             # -------------------------------------------------------------
             # Game State
             # -------------------------------------------------------------
@@ -95,18 +96,18 @@ class Automate():
             # *************************************************************
             # Ablauf initialization
             # *************************************************************
-            abl.Automate.init()
+            Automate.init()
 
             # -------------- -----------------------------------------------
             # Set Debug Level
             # -------------------------------------------------------------
-            abl.Automate.setDebugMode(True)
+            Automate.setDebugMode(True)
 
             # *************************************************************
             # Start Ablauf state engine
             # *************************************************************
-            abl.Automate.start("State")
-            abl.Automate.transit("FinishFromState")
+            Automate.start("State")
+            Automate.transit("FinishFromState")
         """
 
         self.log("initialize Ablauf")
